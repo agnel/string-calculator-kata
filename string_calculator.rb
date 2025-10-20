@@ -13,6 +13,11 @@ class StringCalculator
       numbers = parts[1]
     end
 
-    numbers.split(delimiter).map(&:to_i).reduce(:+)
+    nums = numbers.split(delimiter).map(&:to_i)
+    negatives = nums.select(&:negative?)
+
+    raise ArgumentError, "negatives not allowed: #{negatives.join(', ')}" unless negatives.empty?
+
+    nums.reduce(:+)
   end
 end
