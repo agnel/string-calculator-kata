@@ -10,6 +10,10 @@ describe StringCalculator do
     it 'returns 0 for an empty string' do
       expect(calculator.add('')).to eq(0)
     end
+
+    it 'returns the number for a single input' do
+      expect(calculator.add('7')).to eq(7)
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
