@@ -5,26 +5,37 @@ class StringCalculator
   def add(numbers)
     return 0 if numbers.empty?
 
-    delimiter = /,|\n/
-
-    if numbers.start_with?('//')
-      parts = numbers.split("\n", 2)
-      delimiter_part = parts[0][2..]
-
-      delimiter = if delimiter_part.start_with?('[') && delimiter_part.end_with?(']')
-                    Regexp.new(Regexp.escape(delimiter_part[1..-2]))
-                  else
-                    Regexp.new(Regexp.escape(delimiter_part))
-                  end
-
-      numbers = parts[1]
-    end
-
+    delimiter, numbers = extract_delimiter_and_numbers(numbers)
     nums = numbers.split(delimiter).map(&:to_i)
-    negatives = nums.select(&:negative?)
 
-    raise ArgumentError, "negatives not allowed: #{negatives.join(', ')}" unless negatives.empty?
-
+    check_for_negatives(nums)
     nums.reject { |n| n > 1000 }.reduce(:+)
+  end
+
+  private
+
+  def extract_delimiter_and_numbers(numbers)
+    return [/,|\n/, numbers] unless numbers.start_with?('//')
+
+    parts = numbers.split("\n", 2)
+    delimiter_part = parts[0][2..]
+    delimiter = parse_delimiter(delimiter_part)
+
+    [delimiter, parts[1]]
+  end
+
+  def parse_delimiter(delimiter_part)
+    if delimiter_part.start_with?('[') && delimiter_part.end_with?(']')
+      Regexp.new(Regexp.escape(delimiter_part[1..-2]))
+    else
+      Regexp.new(Regexp.escape(delimiter_part))
+    end
+  end
+
+  def check_for_negatives(nums)
+    negatives = nums.select(&:negative?)
+    return if negatives.empty?
+
+    raise ArgumentError, "negatives not allowed: #{negatives.join(', ')}"
   end
 end
