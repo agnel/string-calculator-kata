@@ -13,7 +13,7 @@ class StringCalculator
       numbers = parts[1]
     end
 
-    nums = numbers.split(delimiter).map(&:to_i)
+    nums = numbers.split(delimiter).map(&:to_i).filter { |n| n <= 1000 }
     negatives = nums.select(&:negative?)
 
     raise ArgumentError, "negatives not allowed: #{negatives.join(', ')}" unless negatives.empty?
