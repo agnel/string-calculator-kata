@@ -25,8 +25,10 @@ class StringCalculator
   end
 
   def parse_delimiter(delimiter_part)
-    if delimiter_part.start_with?('[') && delimiter_part.end_with?(']')
-      Regexp.new(Regexp.escape(delimiter_part[1..-2]))
+    if delimiter_part.start_with?('[')
+      delimiters = delimiter_part.scan(/\[([^\]]+)\]/).flatten
+      pattern = delimiters.map { |d| Regexp.escape(d) }.join('|')
+      Regexp.new(pattern)
     else
       Regexp.new(Regexp.escape(delimiter_part))
     end
