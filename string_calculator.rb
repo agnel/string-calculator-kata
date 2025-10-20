@@ -5,6 +5,7 @@ class StringCalculator
   def add(numbers)
     return 0 if numbers.empty?
 
-    numbers.to_i
+    a, b = numbers.split(',')
+    a.to_i + b.to_i
   end
 end
