@@ -42,6 +42,10 @@ describe StringCalculator do
     it 'ignores numbers bigger than 1000' do 
       expect(calculator.add('2,1001')).to eq(2)
     end
+
+    it 'handles delimiters of any length' do
+      expect(calculator.add("//[***]\n1***2***3")).to eq(6)
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
