@@ -30,6 +30,14 @@ describe StringCalculator do
     it 'supports different delimiters' do
       expect(calculator.add("//;\n1;2")).to eq(3)
     end
+
+    it 'raises exception for negative numbers' do
+      expect { calculator.add('1,-2,3') }.to raise_error(ArgumentError, 'negatives not allowed: -2')
+    end
+
+    it 'raises exception showing all negative numbers' do
+      expect { calculator.add('1,-2,-5') }.to raise_error(ArgumentError, 'negatives not allowed: -2, -5')
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
