@@ -9,7 +9,14 @@ class StringCalculator
 
     if numbers.start_with?('//')
       parts = numbers.split("\n", 2)
-      delimiter = Regexp.escape(parts[0][2..])
+      delimiter_part = parts[0][2..]
+
+      delimiter = if delimiter_part.start_with?('[') && delimiter_part.end_with?(']')
+                    Regexp.new(Regexp.escape(delimiter_part[1..-2]))
+                  else
+                    Regexp.new(Regexp.escape(delimiter_part))
+                  end
+
       numbers = parts[1]
     end
 
