@@ -38,6 +38,10 @@ describe StringCalculator do
     it 'raises exception showing all negative numbers' do
       expect { calculator.add('1,-2,-5') }.to raise_error(ArgumentError, 'negatives not allowed: -2, -5')
     end
+
+    it 'ignores numbers bigger than 1000' do 
+      expect(calculator.add('2,1001')).to eq(2)
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
