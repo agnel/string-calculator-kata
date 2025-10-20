@@ -18,6 +18,10 @@ describe StringCalculator do
     it 'sums two-comma separated numbers' do
       expect(calculator.add('1,5')).to eq(6)
     end
+
+    it 'sums unknown amount of comma separated numbers' do
+      expect(calculator.add('1,2,3,4,5')).to eq(15)
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
