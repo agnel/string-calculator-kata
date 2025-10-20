@@ -11,7 +11,7 @@ Further dependencies for your project can be added via [Gemfile](https://bundler
 
 ## Running Specs
 
-Tests are located in `/spec` directory. To run them:
+Tests are located in `/spec` 	directory. To run them:
 
 ```bash
 $ bundle exec rspec

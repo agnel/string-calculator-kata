@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.join(File.dirname(__FILE__), 'string_calculator')
+require_relative '../string_calculator'
 
 # rubocop:disable Metrics/BlockLength
 describe StringCalculator do
