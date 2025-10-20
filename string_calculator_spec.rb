@@ -14,6 +14,10 @@ describe StringCalculator do
     it 'returns the number for a single input' do
       expect(calculator.add('7')).to eq(7)
     end
+
+    it 'sums two-comma separated numbers' do
+      expect(calculator.add('1,5')).to eq(6)
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
