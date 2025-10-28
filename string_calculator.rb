@@ -12,6 +12,14 @@ class StringCalculator
     nums.reject { |n| n > 1000 }.reduce(:+)
   end
 
+  def calculate(numbers, operation = nil)
+    raise ArgumentError, 'operation missing. e.g. add' if operation.nil?
+
+    if operation == 'add'
+      add(numbers)
+    end
+  end
+
   private
 
   def extract_delimiter_and_numbers(numbers)
