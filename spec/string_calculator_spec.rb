@@ -55,5 +55,15 @@ describe StringCalculator do
       expect(calculator.add("//[**][%%]\n1**2%%3")).to eq(6)
     end
   end
+
+  describe '#calculate' do
+    it 'adds two comma-separated numbers' do
+      expect(calculator.calculate('1,2', 'add')).to eq(3)
+    end
+
+    it 'raises expection when operation is not specified' do
+      expect { calculator.calculate('1,2') }.to raise_error(ArgumentError, 'operation missing. e.g. add')
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
